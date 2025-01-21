@@ -41,7 +41,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	usersList[strconv.Itoa(newUser.Id)] = *newUser
-	fmt.Printf("%+v", usersList)
+	fmt.Printf("%+v\n", usersList)
 
 	sendRes.Send(true, "user registered !", 201, w)
 }
