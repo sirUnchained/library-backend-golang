@@ -9,6 +9,7 @@ import (
 func Start() {
 	mux := http.NewServeMux()
 	mux.Handle("/users", &routes.UserHandler{})
+	mux.Handle("/books", &routes.BookRoutes{})
 
 	server := http.Server{
 		Addr:         ":4000",
