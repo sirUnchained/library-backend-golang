@@ -5,9 +5,9 @@ import (
 	"net/http"
 )
 
-type UserEntity struct{}
+type UserHandler struct{}
 
-func (u *UserEntity) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (u *UserHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch {
 	case r.Method == http.MethodGet:
 		controller.GetAllUsers(w, r)

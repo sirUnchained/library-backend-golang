@@ -23,15 +23,25 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func Register(w http.ResponseWriter, r *http.Request) {
+	// * way 1
+	// var newUser *models.UserModel
+	// err := json.NewDecoder(r.Body).Decode(&newUser)
+	// * way 2
 	newUser := &models.UserModel{}
-	err := json.NewDecoder(r.Body).Decode(&newUser)
+	err := json.NewDecoder(r.Body).Decode(newUser)
+
 	if err != nil {
-		sendRes.Send(false, err.Error(), 500, w)
+		if err.Error() == "EOF" {
+			sendRes.Send(false, "invalid fields.", 400, w)
+		} else {
+			fmt.Println(err)
+			sendRes.Send(false, err.Error(), 500, w)
+		}
 		return
 	}
 
-	fmt.Printf("%+v", newUser)
 	usersList[strconv.Itoa(newUser.Id)] = *newUser
+	fmt.Printf("%+v", usersList)
 
 	sendRes.Send(true, "user registered !", 201, w)
 }
