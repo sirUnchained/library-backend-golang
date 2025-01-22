@@ -10,6 +10,7 @@ func Start() {
 	mux := http.NewServeMux()
 	mux.Handle("/users", &routes.UserHandler{})
 	mux.Handle("/books", &routes.BookRoutes{})
+	mux.Handle("/book-user", &routes.BookUserRoutes{})
 
 	server := http.Server{
 		Addr:         ":4000",
